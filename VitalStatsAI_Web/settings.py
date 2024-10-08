@@ -121,7 +121,7 @@ STATIC_URL = '/static/'
 
 # For development environment
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "Admin_app/static",
 ]
 
 # For production (collect static files)
