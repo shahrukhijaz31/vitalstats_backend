@@ -4,7 +4,7 @@ from .models import CustomUser,Health_Report  # Aapka custom user model
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ('username', 'email', 'is_staff', 'is_active', 'is_approved')  # Aap yahan aur fields bhi add kar sakte hain
+    list_display = ('username', 'email', 'is_staff', 'is_active', 'is_approved', 'user_role')  # Aap yahan aur fields bhi add kar sakte hain
     list_filter = ('is_staff', 'is_active', 'is_approved')
     ordering = ('username',)
     

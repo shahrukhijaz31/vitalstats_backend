@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 class CustomUser(AbstractUser):
+    user_role = models.CharField(max_length=20)
     is_approved = models.BooleanField(default=False)
 
 # Health_Report model
