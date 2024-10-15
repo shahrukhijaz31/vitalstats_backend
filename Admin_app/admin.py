@@ -13,7 +13,10 @@ class CustomUserAdmin(UserAdmin):
     )
 
 class HealthReportAdmin(admin.ModelAdmin):
-    list_display = ('user', 'heart_rate', 'blood_pressure', 'spo2', 'breathing_rate', 'pro', 'hrv', 'stress', 'sympathetic_ns', 'parasympathetic_ns','current_date')  # Fields to display
+    list_display = ('user', 'pulse_rate', 'blood_pressure', 'mean_rri', 'oxygen_saturation',
+                    'hemoglobin', 'hrhemoglobin_a1cv', 'lfhf', 'pns_index', 'pns_zone','rmssd',
+                    'respiration_rate','sd1','sd2','sdnn','sns_index','sns_zone',
+                    'stress_level','stress_index','wellness_index','wellness_level','current_date','current_time')  # Fields to display
     search_fields = ('user__username', 'blood_pressure')  # Fields to search
     list_filter = ('user',)  # Filter options in the admin
     ordering = ('user__username',)

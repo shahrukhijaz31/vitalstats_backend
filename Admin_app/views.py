@@ -20,11 +20,14 @@ def signup(request):
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
+        role =  request.POST.get('role')
 
         if password1 == password2:
             try:
                 user = User.objects.create_user(username=username, email=email, password=password1)
-                user.is_approved = False  # Set to False for admin approval
+                user.is_approved = False
+                
+                user.user_role = role # Set to False for admin approval
                 user.save()
                 messages.success(request, 'Your account has been created! Please wait for admin approval.')
                 return redirect('login')  # Redirect to login page

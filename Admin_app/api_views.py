@@ -26,7 +26,7 @@ def api_signup(request):
         password = data.get('password')
         confirm_password = data.get('confirm_password')
         role =  data.get('role')
-        # import pdb;pdb.set_trace()
+
         if password != confirm_password:
             return JsonResponse({'error': 'Passwords do not match'}, status=400)
 
@@ -99,15 +99,27 @@ def api_health_report_get(request):
         health_reports = Health_Report.objects.filter(user=request.user)
         data = [
             {
-                'heart_rate': report.heart_rate,
+                'pulse_rate': report.pulse_rate,
                 'blood_pressure': report.blood_pressure,
-                'spo2': report.spo2,
-                'breathing_rate': report.breathing_rate,
-                'pro': report.pro,
-                'hrv': report.hrv,
-                'stress': report.stress,
-                'sympathetic_ns': report.sympathetic_ns,
-                'parasympathetic_ns': report.parasympathetic_ns,
+                'mean_rri': report.mean_rri,
+                'oxygen_saturation': report.oxygen_saturation,
+                'hemoglobin': report.hemoglobin,
+                'hrhemoglobin_a1cv': report.hrhemoglobin_a1cv,
+                'lfhf': report.lfhf,
+                'pns_index': report.pns_index,
+                'pns_zone': report.pns_zone,
+                'prq': report.prq,
+                'rmssd': report.rmssd,
+                'respiration_rate': report.respiration_rate,
+                'sd1': report.sd1,
+                'sd2': report.sd2,
+                'sdnn': report.sdnn,
+                'sns_index': report.sns_index,
+                'sns_zone': report.sns_zone,
+                'stress_level': report.stress_level,
+                'stress_index': report.stress_index,
+                'wellness_index': report.wellness_index,
+                'wellness_level': report.wellness_level,
                 'current_date': report.current_date.strftime('%Y-%m-%d %H:%M:%S'),  # Format date as string
                 'time' : report.current_time.strftime("%H:%M:%S")
             }
@@ -133,30 +145,53 @@ def api_health_report_post(request):
         
         if not request.user.is_approved:
             return JsonResponse({'error': 'User is not approved by admin'}, status=403)
-        
+   
         user = request.user  # Assuming logged-in user
-        heart_rate = request.POST.get('heart_rate')
+        pulse_rate = request.POST.get('pulse_rate')
         blood_pressure = request.POST.get('blood_pressure')
-        spo2 = request.POST.get('spo2')
-        breathing_rate = request.POST.get('breathing_rate')
-        pro = request.POST.get('pro')
-        hrv = request.POST.get('hrv')
-        stress = request.POST.get('stress')
-        sympathetic_ns = request.POST.get('sympathetic_ns')
-        parasympathetic_ns = request.POST.get('parasympathetic_ns')
+        mean_rri = request.POST.get('mean_rri')
+        oxygen_saturation = request.POST.get('oxygen_saturation')
+        hemoglobin = request.POST.get('hemoglobin')
+        hrhemoglobin_a1cv = request.POST.get('hrhemoglobin_a1cv')
+        lfhf = request.POST.get('lfhf')
+        pns_index = request.POST.get('pns_index')
+        pns_zone = request.POST.get('pns_zone')
+        prq = request.POST.get('prq')
+        rmssd = request.POST.get('rmssd')
+        respiration_rate = request.POST.get('respiration_rate')
+        sd1 = request.POST.get('sd1')
+        sd2 = request.POST.get('sd2')
+        sdnn = request.POST.get('sdnn')
+        sns_index = request.POST.get('sns_index')
+        sns_zone = request.POST.get('sns_zone')
+        stress_level = request.POST.get('stress_level')
+        stress_index = request.POST.get('stress_index')
+        wellness_index = request.POST.get('wellness_index')
+        wellness_level = request.POST.get('wellness_level')
 
         health_report = Health_Report(
             user=user,
-            heart_rate=heart_rate,
+            pulse_rate=pulse_rate,
             blood_pressure=blood_pressure,
-            spo2=spo2,
-            breathing_rate=breathing_rate,
-            pro=pro,
-            hrv=hrv,
-            stress=stress,
-            sympathetic_ns=sympathetic_ns,
-            parasympathetic_ns=parasympathetic_ns,
-            # current_date=timezone.now()  # Manually set current date
+            mean_rri=mean_rri,
+            oxygen_saturation=oxygen_saturation,
+            hemoglobin=hemoglobin,
+            hrhemoglobin_a1cv=hrhemoglobin_a1cv,
+            lfhf=lfhf,
+            pns_index=pns_index,
+            pns_zone=pns_zone,
+            prq=prq,
+            rmssd=rmssd,
+            respiration_rate=respiration_rate,
+            sd1=sd1,
+            sd2=sd2,
+            sdnn=sdnn,
+            sns_index=sns_index,
+            sns_zone=sns_zone,
+            stress_level = stress_level,
+            stress_index=stress_index,
+            wellness_index=wellness_index,
+            wellness_level=wellness_level
         )
         health_report.save()
         return JsonResponse({'message': 'success'}, status=201)
